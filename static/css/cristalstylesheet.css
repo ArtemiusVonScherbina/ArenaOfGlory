@@ -19,14 +19,14 @@
     position: absolute;
     width:100%;
     height:100%;
-    background:url(http://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_01.png)repeat-y;
+    background:url("static/img/particle1.png")repeat-y;
 }
 .crystal_02 {
     z-index: -99;
     position:absolute;
     width:100%;
     height:100%;
-    background:url(http://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_02.png)repeat-y;
+    background:url("static/img/particle2.png")repeat-y;
 }
 .crystal_03 {
     z-index: -99;
@@ -35,5 +35,5 @@
     height:100%;
     left:50%;
     margin-left:-180px;
-        background:url(http://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_03.png)repeat-y;
+    background:url("static/img/particle3.png")repeat-y;
 }
