@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}{{title}}{% endblock title %}
+{% block CSS %}
+	<link rel="stylesheet" href="{% static 'css/mainStyleSheet.css' %}">
+{% endblock CSS %}
+{% block content %}
+
+	{%for room in rooms %}
+	{# Переход на выбраную комнату по нажатию. #}
+		<a href="{{room.get_absolute_url}}" title="">
+		<div class="col-sm-3 go_to_room" data-id="{{room.id}}" style="background-color:rgba(51, 102, 255, 0.5);border-radius: 4px;color: #a6a6a6;border:1px solid #a6a6a6;">
+			<div class="col-sm-12">Name room: {{room}}</div>
+			<div class="col-sm-12" >When start: {{room.data_begin}}</div>
+			{% for character in characters %}
+				{% if character.room == room %}
+					<div class="col-xs-12">
+
+						Player name: {{character}} <br> Player race:{# Адекватное отображения расы #}{%for race in races%}{%if race.0 == character.race %}{{race.1}}{%endif%}{%endfor%}<br>
+					</div>
+				{% endif %}
+			{%endfor%}
+		</div>
+		</a>
+
+	{% endfor %}
+{% endblock %}

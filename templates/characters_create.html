@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
+{% block title%} {{ title }}{% endblock title %}
+{% block CSS %}
+<link rel="stylesheet" href="{% static 'css/charcreate.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Crimson+Text'>
+<style type="text/css">
+	p {
+font-family: 'Crimson Text', serif;
+color: #ffffff;
+font-size: 20px
+}
+</style>
+{% endblock CSS %}
+{% block content %}
+<form action="/main/" method="POST" >
+	{% csrf_token %}
+	<p align="center">Name Room:</p> <center><input type="text" name = "nameRoom" align="middle"></center><br>
+	<div class="col-xs-12 col-sm-6 player_div charactr_div" >
+		<p>Name:</p><input type="text" name="nameChar" placeholder="Input Name"><br>
+		<p>Race:</p><select name="raceChar">
+		{% for race1,race2 in races %}
+			<option value="{{race1}}">{{race2}}</option>
+		{% endfor %}
+	</select></div>
+	<div class="col-xs-12 col-sm-6 enemy_div charactr_div" >
+		<p>Name:</p><input type="text" name="nameEnem"><br>
+		<p>Race:</p><select name="raceEnem">
+		{% for race1,race2 in races %}
+			<option value="{{race1}}">{{race2}}</option>
+		{% endfor %}
+	</select></div>
+</div>
+<center><button type="submit" class="btn btn-success" align="middle">OK</button>
+</form>
+{# Переход на страницу с комнатами. #}
+<a href="/main"><button type="submit" class="btn btn-danger" align="middle">Cancel</button></a>
+</center>
+{% endblock content %}
