@@ -2,23 +2,20 @@
 {% load staticfiles %}
 {% block title %}{{title}}{% endblock title %}
 {% block CSS %}
+<link rel="stylesheet" href="{% static 'css/fightstyle.scss'%}">
 <link rel="stylesheet" href="{% static 'css/fightstyle.css'%}">
 <style>
 	.player_container{
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: contain;
-	}
-	.player_img{
 		background-image: url({% static 'img/Gladiator.png'%});
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size: contain;
-
 	}
 	.player_container>div{
 		
-height: 700px;
+height: 200px;
+display: -webkit-flex;
+display: flex;
 	}
 	.enemy_container{
 		background-image: url({% static 'img/Werewolf.png'%});
@@ -48,7 +45,7 @@ margin-bottom: 15px;
 /* The close button */
 .closebtn {
 margin-left: 15px;
-color: white;
+color: #f44336;
 font-weight: bold;
 float: right;
 font-size: 22px;
@@ -63,22 +60,28 @@ color: black;
 </style>
 {% endblock CSS%}
 {% block content %}
+<div style="position: absolute; {%if status%}
+	 display: none 
+	 {%else%} 
+	 display: block 
+	 {%endif%}">
+	
+</div>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-6" style="padding: 0px">
 			{# Вставил имена и айдишники для Игрока и Врага, для отправки запроса #}
-			<div class="col-xs-2 player_name" data-id = "{{players.0.id}}">{{players.0.name}}</div>
+			<div class="col-xs-2 player_name" data-id = "{{players.0.id}}" style="color: #cccccc">{{players.0.name}}</div>
 			<div class="col-xs-10 health_bar "><div id ="player" class="health_div " style="float: left; width: {{players.0.health}}%"></div></div>
 		</div>
 		<div class="col-xs-6" style="padding: 0px">
 			<div  class="col-xs-10 health_bar "><div id="enemy" class="health_div" style="float: right; width: {{players.1.health}}% "></div></div>
-			<div class="col-xs-2 enemy_name" data-id = "{{players.1.id}}">{{players.1.name}}</div>
+			<div class="col-xs-2 enemy_name" data-id = "{{players.1.id}}" style="color: #cccccc">{{players.1.name}}</div>
 		</div>
 	</div>
-	<div class="row">
-			<div class="col-xs-12 player_container" style=" display: -webkit-flex; display: flex;">
-			<div class="col-xs-6 player_img">
-				<div class="col-xs-4 click_me_player" data-part="0"  ></div>
+	<div class="row" id="room" data-id="{{instance.id}}" style=" display: -webkit-flex; display: flex; -webkit-justify-content: flex-end;justify-content: flex-end;">
+			<div class="col-xs-6 player_container" >
+				<div class="col-xs-12 click_me_player" data-part="0"></div>
 				<div class="col-xs-4 click_me_player" data-part="2"></div>
 				<div class="col-xs-4 click_me_player" data-part="1"></div>
 				<div class="col-xs-4 click_me_player" data-part="3"></div>
@@ -92,15 +95,11 @@ color: black;
 				<div class="col-xs-12 click_me_enemy" data-part="4"></div>
 			</div>
 		</div>
-		<button id="fight" class="btn btn-danger">Attack</button>
+<div class="button-container">
+ <button class="closebtn" id="fight"><span>Attack</span></button>
+</div>
 		{# Переход на страницу с комнатами #}
-		<a href="/main" title=""><button class="btn">Return to rooms</button></a>
-		{% if players.0.health == 0 %}
-			<div class="alert">
-				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-				<strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-			</div>
-		{% endif %}
+		<a href="/main" title=""><button class="closebtn">Return to rooms</button></a>
 	</div>
 {% endblock content%}
 {% block scripts %}

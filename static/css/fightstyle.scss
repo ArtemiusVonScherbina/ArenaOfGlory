@@ -1,0 +1,39 @@
+@import "bourbon";
+.button-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  display: block;
+  height: 50px;
+  width: 186px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  
+  &:after {
+    content:'';
+    height: 50px;
+    width: 372px;
+    z-index: -1;
+    transform: translateX(-280px);
+    transition: transform 400ms ease-in;
+  }
+  
+  &:hover {
+    &:after {
+      transform: translateX(-200px);
+    }
+  }
+  span {
+    position: relative;
+    top: 16px;
+  }
+}

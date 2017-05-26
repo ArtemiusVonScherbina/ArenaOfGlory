@@ -9,8 +9,6 @@ $(document).ready(function(){
 		$(this).toggleClass("clicked_enemy");
 	});
 	$("#fight").click(function(){
-        a=$("#player_name").data("id");
-        b =$("#emeny_name").data("id")
 		$.ajax({
             type: "GET",
             url: "/attack/",
@@ -20,14 +18,20 @@ $(document).ready(function(){
                 // Допонительные параметры для поиска персонажей в базе данных
                 'enemyId':$(".player_name").data('id'),
                 'playerId':$(".enemy_name").data('id'),
+                'id':$("#room").data('id'),
             },
             cache:false,
             success:
             function(data){
             	console.log(data)
             	var obj = jQuery.parseJSON( data );
+                if(obj.url){
+                    alert(obj.url)
+                    window.location=obj.url;}
+                else{
             	$("#enemy").css("width",obj.healthEnemy+"%");
             	$("#player").css("width",obj.healthPlayer+"%");    
+            }
             }
        });
 	})

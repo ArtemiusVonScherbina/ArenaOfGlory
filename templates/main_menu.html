@@ -8,10 +8,12 @@
 
 	{%for room in rooms %}
 	{# Переход на выбраную комнату по нажатию. #}
-		<a href="{{room.get_absolute_url}}" title="">
+	
+		<a href="{%if room.data_end%}{{room.get_result}}{%else%}{{room.get_absolute_url}}{%endif%}" title="">
 		<div class="col-sm-3 go_to_room" data-id="{{room.id}}" style="background-color:rgba(51, 102, 255, 0.5);border-radius: 4px;color: #a6a6a6;border:1px solid #a6a6a6;">
 			<div class="col-sm-12">Name room: {{room}}</div>
 			<div class="col-sm-12" >When start: {{room.data_begin}}</div>
+			<div class="col-sm-12" >When ends: {{room.data_end}}</div>
 			{% for character in characters %}
 				{% if character.room == room %}
 					<div class="col-xs-12">
